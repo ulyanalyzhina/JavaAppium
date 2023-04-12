@@ -11,6 +11,7 @@ public class MWArticlePageObject extends ArticlePageObject {
         OPTIONS_REMOVE_FROM_MY_LIST_BUTTON = "xpath://a[@title='Unwatch']|//a[@title='Remove this page from your watchlist']";
         TITLE_TPL = "xpath://*[contains(text(),'{SUBSTRING}')]";
         TITLE_TPL_ON_PAGE = "xpath://span[contains(text(),'{SUBSTRING}')]";
+        GO_LOGO = ("xpath://img[@alt='Go Logo Blue.svg']");
 
     }
     public MWArticlePageObject(RemoteWebDriver driver) {

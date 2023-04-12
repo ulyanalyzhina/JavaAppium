@@ -9,8 +9,6 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static java.lang.Thread.sleep;
-
 public class MyListsTests extends CoreTestCase {
     private static final String name_of_folder = "Learning programming";
     private static final String login = "Uliana7777", password = "Uliana7778";
@@ -101,13 +99,15 @@ public class MyListsTests extends CoreTestCase {
         }
 
         ArticlePageObject.clickOnArticle(second_article_title);
-
+        //first variant -> with title
         ArticlePageObject.waitForTitleElement(second_article_title);
         ArticlePageObject.assertArticlePageTitlePresent(second_article_title);
         ArticlePageObject.assertElementHasTitle(second_article_title);
+        //second variant -> without title
+        ArticlePageObject.waitForImgElement();
     }
 
-    private void findArticleAndClickToAddToFolder(String article_text, String article_title, String description) throws InterruptedException {
+    private void findArticleAndClickToAddToFolder(String article_text, String article_title, String description) {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(article_text);

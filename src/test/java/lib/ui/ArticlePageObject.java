@@ -29,7 +29,7 @@ abstract public class ArticlePageObject extends MainPageObject {
             CREATE_LIST_BUTTON,
             HOME_BUTTON,
             TITLE_TPL_ON_PAGE,
-            OPTIONS_ADD_TO_MY_LIST_BUTTON_V1,
+            GO_LOGO,
     OPTIONS_REMOVE_FROM_MY_LIST_BUTTON;
 
     private static String getTitleFromTPL(String substring) {
@@ -56,6 +56,11 @@ abstract public class ArticlePageObject extends MainPageObject {
     public WebElement waitForTitleElement(String title) {
         return this.waitForElementPresentBy(getTitleFromTPL(title),
                 "Cannot find article title on page", 15);
+    }
+
+    public WebElement waitForImgElement() {
+        return this.waitForElementPresentBy(GO_LOGO,
+                "Cannot find article image on page", 15);
     }
 
 
