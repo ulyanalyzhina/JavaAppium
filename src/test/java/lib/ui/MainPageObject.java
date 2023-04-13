@@ -295,10 +295,16 @@ public class MainPageObject extends CoreTestCase {
     ) {
 
         if(Platform.getInstance().isMW()){
+            String  byDescriptionStr= locatorDescription.replace("{replace}", new StringBuilder().append(index).toString());
+            String byTitleStr = locatorTitle.replace("{replace}", new StringBuilder().append(index).toString());
 
+            By byDescription = this.getLocatorWithByString(byDescriptionStr);
+            By byTitle = this.getLocatorWithByString(byTitleStr);
+
+            assertEquals(description, driver.findElement(byDescription).getText());
+            assertEquals(title, driver.findElement(byTitle).getAttribute("title"));
         } else {
             By byTitle = this.getLocatorWithByString(locatorTitle);
-            System.out.println(locatorTitle);
             assertEquals((title), els.get(index)
                     .findElement(byTitle)
                     .getText());
@@ -306,7 +312,7 @@ public class MainPageObject extends CoreTestCase {
             assertEquals((description), els.get(index)
                     .findElement(byDescription)
                     .getText());
-        }
+       }
     }
 
     public void swipeUpTillElementAppear(String locator, String error_message, int max_swipes ){
@@ -393,5 +399,4 @@ public class MainPageObject extends CoreTestCase {
             ++ current_attempts;
         }
     }
-
 }

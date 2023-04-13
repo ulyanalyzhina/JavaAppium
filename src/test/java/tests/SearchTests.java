@@ -92,14 +92,10 @@ public class SearchTests extends CoreTestCase {
             SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 0, "Java", "Island of Indonesia, Southeast Asia");
             SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 1, "JavaScript", "High-level programming language");
             SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 2, "Java (programming language)", "Object-oriented programming language");
-        } else if ((Platform.getInstance().isIOS())){
+        } else {
             SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 1, "Java", "Island in Indonesia");
             SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 2, "JavaScript", "High-level programming language");
             SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 3, "Java (programming language)", "Object-oriented programming language");
-        } else {
-            SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 0, "Java", "Island in Indonesia");
-            SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 1, "JavaScript", "High-level programming language");
-            SearchPageObject.assertSearchedItemHasTitleAndDescription(els, 2, "Java (programming language)", "Object-oriented programming language");
         }
     }
 }
