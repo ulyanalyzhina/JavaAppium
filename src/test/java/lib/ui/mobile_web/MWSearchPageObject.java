@@ -15,9 +15,9 @@ public class MWSearchPageObject extends SearchPageObject
         SEARCH_EMPTY_RESULT_ELEMENT = "css:p.without-results";
 
         SEARCH_RESULT_LIST = "id:org.wikipedia:id/search_results_list";
-        SEARCH_RESULT_LIST_ITEM = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']";
-        SEARCH_RESULT_LIST_ITEM_TITLE = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title']";
-        SEARCH_RESULT_LIST_ITEM_DESCRIPTION = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description']";
+        SEARCH_RESULT_LIST_ITEM = "xpath://div[@class='results-list-container view-border-box']//ul[@class='page-list thumbs actionable']//li";
+        SEARCH_RESULT_LIST_ITEM_TITLE = "xpath://h3/strong";
+        SEARCH_RESULT_LIST_ITEM_DESCRIPTION = "xpath://div[@class='wikidata-description']";
         SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION =
                 "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']" +
                         "//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']/" +

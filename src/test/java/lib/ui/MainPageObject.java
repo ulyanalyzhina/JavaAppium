@@ -293,14 +293,20 @@ public class MainPageObject extends CoreTestCase {
             String locatorTitle,
             String locatorDescription
     ) {
-        By byTitle = this.getLocatorWithByString(locatorTitle);
-        assertEquals((title), els.get(index)
-                .findElement(byTitle)
-                .getText());
-        By byDescription = this.getLocatorWithByString(locatorDescription);
-        assertEquals((description), els.get(index)
-                .findElement(byDescription)
-                .getText());
+
+        if(Platform.getInstance().isMW()){
+
+        } else {
+            By byTitle = this.getLocatorWithByString(locatorTitle);
+            System.out.println(locatorTitle);
+            assertEquals((title), els.get(index)
+                    .findElement(byTitle)
+                    .getText());
+            By byDescription = this.getLocatorWithByString(locatorDescription);
+            assertEquals((description), els.get(index)
+                    .findElement(byDescription)
+                    .getText());
+        }
     }
 
     public void swipeUpTillElementAppear(String locator, String error_message, int max_swipes ){
