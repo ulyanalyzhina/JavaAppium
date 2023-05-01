@@ -4,16 +4,19 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Attachment;
 import lib.CoreTestCase;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -281,7 +284,7 @@ public class MainPageObject extends CoreTestCase {
             String text = el.findElement(
                     (by)
             ).getText();
-            assertTrue(text.toLowerCase().contains(match.toLowerCase()));
+            Assert.assertTrue(text.toLowerCase().contains(match.toLowerCase()));
         });
     }
 
@@ -301,15 +304,15 @@ public class MainPageObject extends CoreTestCase {
             By byDescription = this.getLocatorWithByString(byDescriptionStr);
             By byTitle = this.getLocatorWithByString(byTitleStr);
 
-            assertEquals(description, driver.findElement(byDescription).getText());
-            assertEquals(title, driver.findElement(byTitle).getAttribute("title"));
+            Assert.assertEquals(description, driver.findElement(byDescription).getText());
+            Assert.assertEquals(title, driver.findElement(byTitle).getAttribute("title"));
         } else {
             By byTitle = this.getLocatorWithByString(locatorTitle);
-            assertEquals((title), els.get(index)
+            Assert.assertEquals((title), els.get(index)
                     .findElement(byTitle)
                     .getText());
             By byDescription = this.getLocatorWithByString(locatorDescription);
-            assertEquals((description), els.get(index)
+            Assert.assertEquals((description), els.get(index)
                     .findElement(byDescription)
                     .getText());
        }
@@ -398,5 +401,30 @@ public class MainPageObject extends CoreTestCase {
             }
             ++ current_attempts;
         }
+    }
+
+    public String takeScreenshot(String name){
+        TakesScreenshot ts = (TakesScreenshot)this.driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "/" + name + "_screenshot.png";
+        try {
+            FileUtils.copyFile(source, new File(path));
+            System.out.println("The screenshot was taken: " + path);
+        } catch (Exception e) {
+           System.out.println("Cannot take screenshot. Error: " + e.getMessage());
+        }
+        return path;
+    }
+
+    @Attachment
+    public static byte[] screenshot(String path) {
+        byte[] bytes = new byte[0];
+
+        try {
+            bytes = Files.readAllBytes(Paths.get(path));
+        } catch(IOException e) {
+            System.out.println("Cannot get bytes from screenshot. Error: " + e.getMessage());
+        }
+        return  bytes;
     }
 }

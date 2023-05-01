@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.ui.*;
 import lib.ui.factories.ArticlePageObjectFactory;
@@ -9,11 +11,17 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("Tests for lists")
 public class MyListsTests extends CoreTestCase {
     private static final String name_of_folder = "Learning programming";
     private static final String login = "Uliana7777", password = "Uliana7778";
 
     @Test
+    @Features(value= {@Feature("Search"), @Feature(value = "Article"), @Feature(value = "Auth"), @Feature(value = "Save to list")})
+    @DisplayName("Save article to my list")
+    @Description("We find article, save it to list, verify the list and than delete it from the list")
+    @Step("Starting test testSaveFirstArticleToMyList")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testSaveFirstArticleToMyList() throws InterruptedException {
         String searchText = "Java";
         String articleTitle = "Java (programming language)";
@@ -53,6 +61,11 @@ public class MyListsTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value= {@Feature("Search"), @Feature(value = "Article"), @Feature(value = "Auth"), @Feature(value = "Save to list")})
+    @DisplayName("Save article to my list")
+    @Description("We find  2 articles, save it to list, verify the list and than delete it from the list")
+    @Step("Starting test testSaveTwoArticles")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testSaveTwoArticles() throws InterruptedException {
         String search_text_first_article = "Java";
         String search_text_second_article = "Golang";

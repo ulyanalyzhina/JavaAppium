@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -33,6 +34,7 @@ abstract public class SearchPageObject extends MainPageObject {
         super(driver);
     }
 
+    @Step("Initializing the search field")
     public void initSearchInput() {
         this.waitForElementPresentBy(
                 SEARCH_INIT_ELEMENT,
@@ -44,7 +46,7 @@ abstract public class SearchPageObject extends MainPageObject {
                 "Cannot find and click search init element", 5
         );
     }
-
+    @Step("Typing '{search_line}' to the search line")
     public void typeSearchLine(String search_line) {
         this.waitForElementByAndSendKeys(
                 SEARCH_INPUT,
@@ -53,14 +55,14 @@ abstract public class SearchPageObject extends MainPageObject {
                 5
         );
     }
-
+    @Step("Waiting for search result")
     public void waitForSearchResult(String substring) {
         String search_result = getResultSearchElement(substring);
 
         this.waitForElementPresent(search_result, "Cannot find search result " + substring);
     }
 
-
+    @Step("Waiting for button to cancel search result")
     public void waitForCancelButtonToAppear() {
         this.waitForElementPresentBy(
                 SEARCH_CANCEL_BUTTON,
@@ -68,7 +70,7 @@ abstract public class SearchPageObject extends MainPageObject {
                 5
         );
     }
-
+    @Step("Waiting for button to disappear")
     public void waitForCancelButtonToDisappear() {
         this.waitForElementNotPresent(
                 SEARCH_CANCEL_BUTTON,
@@ -87,7 +89,7 @@ abstract public class SearchPageObject extends MainPageObject {
                 15
         );
     }
-
+    @Step("Waiting for search result and select an article by substring in article")
     public void clickByArticleWithSubString(String substring) {
         String search_result = getResultSearchElement(substring);
         System.out.println(search_result);
@@ -98,7 +100,7 @@ abstract public class SearchPageObject extends MainPageObject {
                 15
         );
     }
-
+    @Step("Getting amount of found articles")
     public int getAmountOfFoundArticles() {
         this.waitForElementPresentBy(
                 SEARCH_RESULT_ELEMENT,
@@ -108,14 +110,14 @@ abstract public class SearchPageObject extends MainPageObject {
 
         return this.getAmountOfElements(SEARCH_RESULT_ELEMENT);
     }
-
+    @Step("Waiting for empty result label" )
     public void waitForEmptyResultsLabel() {
         this.waitForElementPresentBy(
                 SEARCH_EMPTY_RESULT_ELEMENT,
                 "Cannot find empty result element",
                 15);
     }
-
+    @Step("Making sure there are no result for the search")
     public void assertThereIsNoResultOfSearch() {
         this.assertElementNotPresent(SEARCH_RESULT_ELEMENT, "We supposed not to find any results");
     }
